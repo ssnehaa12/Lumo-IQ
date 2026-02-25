@@ -16,33 +16,7 @@ The platform accepts natural language queries, reasons over 50,000+ real-scale c
 
 ## Architecture
 
-```
-┌─────────────────────────────────────────────────┐
-│                  React Frontend                  │
-│         TypeScript · Vite · Tailwind CSS         │
-└─────────────────────┬───────────────────────────┘
-                      │ REST
-┌─────────────────────▼───────────────────────────┐
-│                  FastAPI Backend                  │
-│              Python · Cloud Run (GCP)             │
-└─────────────────────┬───────────────────────────┘
-                      │
-┌─────────────────────▼───────────────────────────┐
-│             LangGraph ReAct Agent                 │
-│                                                   │
-│  ┌─────────────┐  ┌──────────┐  ┌─────────────┐ │
-│  │  BigQuery   │  │   RAG    │  │  Rec Engine │ │
-│  │  SQL Tool   │  │  Layer   │  │             │ │
-│  └──────┬──────┘  └────┬─────┘  └─────────────┘ │
-└─────────┼──────────────┼───────────────────────-─┘
-          │              │
-┌─────────▼──────┐  ┌────▼──────────────────────┐
-│   BigQuery     │  │  ChromaDB + Pharmacy Docs  │
-│  50K+ Claims   │  │  KPIs · Formulary · Rules  │
-└────────────────┘  └───────────────────────────┘
-```
-
----
+![Lumo IQ Backend Architecture](assets/architecture.png)
 
 ## Stack
 
