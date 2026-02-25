@@ -1,77 +1,177 @@
-# PharmEngine AI 🏥
-   
-   **Conversational Analytics Platform for Pharmacy Data**
-   
-   An agentic AI system that autonomously analyzes pharmacy claims data, generates insights, and provides actionable recommendations for healthcare business decisions.
-   
-   ## 🚀 Features
-   
-   - **Conversational Analytics**: Natural language interface to query pharmacy data
-   - **Agentic AI**: Autonomous multi-step reasoning and tool orchestration
-   - **BigQuery Integration**: Direct queries to enterprise data warehouse
-   - **RAG System**: Retrieves business context from documentation
-   - **Decision Intelligence**: Generates actionable recommendations with business impact
-   - **Production-Ready**: Deployed on GCP with monitoring and observability
-   
-   ## 🏗️ Architecture
+# Lumo IQ
+
+Lumo IQ is an AI-powered analytics platform for pharmacy benefit management. It combines a LangGraph reasoning agent, a grounded RAG knowledge layer, and a real-time BigQuery data pipeline to deliver decision-grade insights from natural language queries — in seconds.
+
+> Built for pharmacy analysts, PBM teams, and health plan operators who need answers, not dashboards.
+
+---
+
+## Overview
+
+Most pharmacy analytics tools give you charts. Lumo IQ gives you decisions.
+
+The platform accepts natural language queries, reasons over 50,000+ real-scale claims records, cross-references a 26,000-token pharmacy knowledge base, and returns grounded, actionable recommendations — with dollar impact attached.
+
+---
+
+## Architecture
+
 ```
-   Streamlit UI
-       ↓
-   LangGraph Agent
-       ↓
-   Tools:
-   ├── BigQuery SQL Tool
-   ├── Statistical Analysis Tool
-   ├── Documentation RAG
-   └── Recommendation Engine
-       ↓
-   Data Sources:
-   ├── BigQuery (Claims Data)
-   └── GCS (Documentation)
+┌─────────────────────────────────────────────────┐
+│                  React Frontend                  │
+│         TypeScript · Vite · Tailwind CSS         │
+└─────────────────────┬───────────────────────────┘
+                      │ REST
+┌─────────────────────▼───────────────────────────┐
+│                  FastAPI Backend                  │
+│              Python · Cloud Run (GCP)             │
+└─────────────────────┬───────────────────────────┘
+                      │
+┌─────────────────────▼───────────────────────────┐
+│             LangGraph ReAct Agent                 │
+│                                                   │
+│  ┌─────────────┐  ┌──────────┐  ┌─────────────┐ │
+│  │  BigQuery   │  │   RAG    │  │  Rec Engine │ │
+│  │  SQL Tool   │  │  Layer   │  │             │ │
+│  └──────┬──────┘  └────┬─────┘  └─────────────┘ │
+└─────────┼──────────────┼───────────────────────-─┘
+          │              │
+┌─────────▼──────┐  ┌────▼──────────────────────┐
+│   BigQuery     │  │  ChromaDB + Pharmacy Docs  │
+│  50K+ Claims   │  │  KPIs · Formulary · Rules  │
+└────────────────┘  └───────────────────────────┘
 ```
-   
-   ## 🛠️ Tech Stack
-   
-   - **Cloud Platform**: Google Cloud Platform (GCP)
-   - **Data Warehouse**: BigQuery
-   - **LLM**: Vertex AI (Gemini Pro)
-   - **Agent Framework**: LangGraph
-   - **Vector Store**: ChromaDB
-   - **UI**: Streamlit
-   - **Deployment**: Cloud Run
-   
-   ## 📊 Dataset
-   
-   Synthetic pharmacy claims data including:
-   - 50,000+ prescription claims
-   - 10,000+ member demographics
-   - Drug formulary information
-   - Realistic healthcare patterns
-   
-   ## 🔧 Setup
-   
-   See `docs/setup.md` for detailed setup instructions.
-   
-   ## 📈 Key Metrics
-   
-   - Generic Dispensing Rate (GDR)
-   - Per Member Per Month Cost (PMPM)
-   - Specialty Drug Proportion
-   - Medication Adherence Rates
-   
-   ## 🎯 Business Use Cases
-   
-   1. Utilization trend analysis
-   2. Cost driver identification
-   3. Formulary optimization
-   4. Member risk stratification
-   5. Clinical program targeting
-   
-   ## 📝 License
-   
-   This is a portfolio project for demonstration purposes.
-   
-   ---
-   
-   **Project ID**: pharmengine-ai
-   **Built with**: LangGraph, Vertex AI, BigQuery, Streamlit
+
+---
+
+## Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | React, TypeScript, Vite, Tailwind CSS, shadcn/ui |
+| Backend | FastAPI, Python 3.11 |
+| Agent | LangGraph ReAct, OpenAI |
+| Knowledge Layer | ChromaDB, LangChain RAG |
+| Data Warehouse | Google BigQuery |
+| Infrastructure | GCP Cloud Run, Vercel |
+
+---
+
+## Key Capabilities
+
+**Natural Language to SQL** — The agent interprets plain English questions, determines the correct query strategy, generates and executes BigQuery SQL, and returns a structured answer. No BI tool. No ticket. No analyst in the loop.
+
+**Grounded Responses** — Every answer is checked against a pharmacy-specific knowledge base covering KPI definitions, drug hierarchies, formulary logic, and industry benchmarks. Hallucinations are structurally prevented.
+
+**Lumoboard** — Auto-generated dashboard with live KPI cards, anomaly alerts, benchmark comparisons, and cohort segmentation. All data is agent-generated by querying BigQuery in real time, with a 1-hour cache layer to keep response times fast.
+
+**Analysis Templates** — Three pre-built lenses over the same underlying data: Executive (spend, GDR, PMPM), Clinical (risk scores, adherence, generic usage), and Financial (cost drivers, specialty share, savings opportunities).
+
+**My Board** — Custom widget builder. Users type any question and the agent returns the right visualization automatically — single KPI card, ranked list, or side-by-side comparison — based on query intent detection.
+
+**Adherence Prediction** — An ML model that flags members at risk of medication non-adherence before discontinuation occurs, enabling proactive outreach.
+
+---
+
+## Performance
+
+| Metric | Result |
+|---|---|
+| Identified savings (generic switching) | $1.08M |
+| Projected annual savings (adherence model) | $1.84M |
+| ROI on targeted interventions | 1,146% |
+| Time to insight | Days → Seconds |
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Python 3.11+
+- Node.js 18+
+- A GCP project with BigQuery enabled
+- An OpenAI API key
+- An Anthropic API key
+
+### 1. Clone the repo
+
+```bash
+git clone https://github.com/ssnehaa12/Lumo-IQ.git
+cd Lumo-IQ
+```
+
+### 2. Configure environment variables
+
+Create a `.env` file in the project root:
+
+```bash
+OPENAI_API_KEY=your_openai_key
+ANTHROPIC_API_KEY=your_anthropic_key
+GOOGLE_CLOUD_PROJECT=your_gcp_project_id
+```
+
+For GCP authentication, you'll need a service account with **BigQuery Data Viewer** and **BigQuery Job User** roles. Download the JSON key and point to it:
+
+```bash
+GOOGLE_APPLICATION_CREDENTIALS=/path/to/your/service-account-key.json
+```
+
+### 3. Run the backend
+
+```bash
+pip install -r requirements.txt
+uvicorn api.main:app --reload --port 8000
+```
+
+Backend will be live at `http://localhost:8000`
+
+### 4. Run the frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Frontend will be live at `http://localhost:5173`
+
+### 5. Connect frontend to backend
+
+Create a `.env` file inside the `frontend/` folder:
+
+```bash
+VITE_API_URL=http://localhost:8000
+```
+
+### 6. Load the data
+
+The synthetic pharmacy claims dataset needs to be loaded into BigQuery before the agent can query it. See `docs/setup.md` for the BigQuery schema and data loading instructions.
+
+> **Note:** You will need your own GCP project and BigQuery dataset. The data used in this project is synthetic and for demonstration purposes only.
+
+---
+
+## Deployment
+
+| Service | Platform |
+|---|---|
+| Backend (FastAPI) | GCP Cloud Run |
+| Frontend (React) | Vercel |
+| Data | GCP BigQuery |
+
+Cloud Run deployment is handled via `Dockerfile` in the project root. The frontend connects to the backend via `VITE_API_URL` environment variable set in Vercel.
+
+---
+
+## Data
+
+Synthetic pharmacy claims dataset:
+- 50,000+ prescription claims
+- 10,000+ member records
+- Drug formulary, pricing, and adherence data
+- Calibrated to reflect realistic PBM patterns and industry benchmarks
+
+---
+
+*Lumo IQ is a portfolio project. Not intended for clinical use.*
