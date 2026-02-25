@@ -16,12 +16,14 @@ app = FastAPI(title="PharmEngine API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:8080", "http://localhost:5173", "http://localhost:3000", "http://localhost:5174"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-    expose_headers=["*"]
-)
+    allow_origins=[
+        "http://localhost:8080",
+        "http://localhost:5173",
+        "http://localhost:3000",
+        "http://localhost:5174",
+        "https://lumo-iq.vercel.app",        # your Vercel URL (update after deploy)
+        "https://*.vercel.app",               # covers all Vercel preview deployments
+    ],)
 
 # ============================================================================
 # CACHING LAYER
