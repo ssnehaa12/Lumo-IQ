@@ -1,0 +1,100 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 222 47% 11%;
+    --card-foreground: 0 0% 100%;
+    --popover: 222 47% 11%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 0 70% 40%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 222 47% 15%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 215 28% 17%;
+    --muted-foreground: 217 33% 65%;
+    --accent: 0 70% 40%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 217 19% 27%;
+    --input: 217 19% 27%;
+    --ring: 0 70% 40%;
+    --radius: 0.5rem;
+    --sidebar-background: 222 84% 5%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 0 70% 40%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 222 47% 15%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 217 19% 27%;
+    --sidebar-ring: 0 70% 40%;
+    --sidebar: 222 84% 5%;
+  }
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}
+
+@layer components {
+  .feature-card {
+    @apply bg-card rounded-xl p-6 shadow-sm border border-border/50 transition-all duration-200 hover:shadow-md hover:border-primary/30;
+  }
+
+  .metric-card {
+    @apply bg-card rounded-xl p-5 shadow-sm border border-border/50;
+  }
+
+  .tab-card {
+    @apply bg-card rounded-xl p-4 shadow-sm border-2 border-transparent cursor-pointer transition-all duration-200 hover:border-primary/50;
+  }
+
+  .tab-card-active {
+    @apply border-primary shadow-md;
+  }
+
+  .chat-bubble {
+    @apply bg-muted rounded-xl p-4 shadow-sm;
+  }
+
+  .quick-action-pill {
+    @apply inline-flex items-center gap-2 px-4 py-2 bg-card rounded-full border border-border shadow-sm text-sm font-medium text-foreground transition-all duration-200 hover:border-primary hover:shadow-md cursor-pointer;
+  }
+
+  .status-badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold;
+  }
+
+  .status-low {
+    @apply bg-green-500/20 text-green-400;
+  }
+
+  .status-moderate {
+    @apply bg-yellow-500/20 text-yellow-400;
+  }
+
+  .status-high {
+    @apply bg-orange-500/20 text-orange-400;
+  }
+
+  .status-critical {
+    @apply bg-red-500/20 text-red-400;
+  }
+
+  .gradient-title {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/70;
+  }
+
+  .chart-card {
+    @apply bg-card rounded-xl p-6 shadow-sm border border-border/50;
+  }
+}
