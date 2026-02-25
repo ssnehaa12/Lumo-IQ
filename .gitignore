@@ -47,3 +47,7 @@
    build/
    dist/
    *.egg-info/venv/
+.DS_Store
+pharmengine-deploy.zip
+chroma_db/
+.ipynb_checkpoints/
